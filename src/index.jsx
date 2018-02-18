@@ -1,12 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
-import Root from './Root.jsx'
+import App from './App.jsx'
 
-const render = () => ReactDOM.render(
+const helloAppReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD': 
+      return [...state, action.message];
+  }
+}
+
+let store = createStore(helloAppReducer)
+
+const render = () => ReactDOM.render(  
   <AppContainer>
-    <Root />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </AppContainer>,
   document.getElementById('root')
 );
