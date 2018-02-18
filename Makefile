@@ -10,7 +10,7 @@ clean:
 yarn.lock: package.json
 	$(YARN) install
 
-dist/bundle.js: yarn.lock src/*.*
+dist/bundle.js: webpack.config.js yarn.lock src/*.*
 	webpack
 
 .PHONY: all clean
