@@ -4,9 +4,6 @@
   "main": "index.js",
   "author": "Marcin Drobik <mdrobik@future-processing.com>",
   "license": "MIT",
-  "scripts": {
-    "build": "webpack -p"
-  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -16,6 +13,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "uglifyjs-webpack-plugin": "^1.2.0",
-    "webpack": "^3.11.0"
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
   }
 }

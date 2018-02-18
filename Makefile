@@ -8,6 +8,9 @@ clean:
 	rm -rf ./dist
 	rm yarn.lock
 
+start-dev: all
+	webpack-dev-server
+
 define print_env
 	echo "IS_DEV=$(IS_DEV) YARN=$(YARN)">$(1) 
 endef
@@ -30,4 +33,4 @@ else
 	webpack -p
 endif
 
-.PHONY: all clean force-rebuild
+.PHONY: start all clean force-rebuild
