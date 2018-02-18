@@ -1,23 +1,30 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const isDevelopment = process.env["IS_DEV"] === 'true';
 
 const devConfig = {
+    entries: ['react-hot-loader/patch'],
     devtool: 'inline-source-map',
-    plugins: []
+    plugins: [new webpack.NamedModulesPlugin(), new webpack.HotModuleReplacementPlugin()],
+    devServer: {
+        hot: true
+    }
 };
 
 const productionConfig = {
+    entries: [],
     devtool: '',
-    plugins: []
+    plugins: [],
+    devServer: null
 };
 
 const additionalConfig = isDevelopment ? devConfig : productionConfig;
 
 module.exports = {
-    entry: './src/index.jsx',
+    entry: additionalConfig.entries.concat(['./src/index.jsx']),
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
@@ -30,5 +37,6 @@ module.exports = {
     plugins: [new HtmlWebpackPlugin({
         template: 'src/index.html'
     })].concat(additionalConfig.plugins),
-    devtool: additionalConfig.devtool
+    devtool: additionalConfig.devtool,
+    devServer: additionalConfig.devServer
 };
