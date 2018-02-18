@@ -1,11 +1,12 @@
-NPM		?= yarn
+PATH  	:= node_modules/.bin:$(PATH)
+YARN	?= yarn
 
-.PHONY: build
+all: yarn.lock dist/bundle.js
 
 yarn.lock: package.json
-	$(NPM)
+	$(YARN) install
 
-build: yarn.lock
-	$(NPM) run build
+dist/bundle.js: yarn.lock src/*.*
+	webpack
 
-
+.PHONY: all

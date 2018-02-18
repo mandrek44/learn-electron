@@ -5,7 +5,7 @@
   "author": "Marcin Drobik <mdrobik@future-processing.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack -p"
   },
   "devDependencies": {
     "html-webpack-plugin": "^2.30.1",
