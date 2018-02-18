@@ -6,7 +6,7 @@ import Input from './Input.jsx'
 import Messages from './Messages.jsx'
 
 const App = () => (<div>
-        <h1>Hello world</h1>
+        <h1>Hello world!</h1>
         <Messages />
         <Input />
     </div>);

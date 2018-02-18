@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'
 
-const MessagesPresenter = ({messages}) => (<ul>
+const MessagesPresenter = ({messages}) => (<ol>
     {(messages || []).map((message, index) => <li key={index}>{message}</li>)}
-</ul>)
+</ol>)
 
 const Messages = connect(state => ({messages: state}))(MessagesPresenter)
 

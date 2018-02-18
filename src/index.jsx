@@ -5,27 +5,28 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 import App from './App.jsx'
-
-const helloAppReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD': 
-      return [...state, action.message];
-  }
-}
+import helloAppReducer from './reducers'
 
 let store = createStore(helloAppReducer)
 
-const render = () => ReactDOM.render(  
+const render = (RootElement) => ReactDOM.render(  
   <AppContainer>
     <Provider store={store}>
-      <App />
+      <RootElement />
     </Provider>
   </AppContainer>,
   document.getElementById('root')
 );
 
-render()
+render(App)
 
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept('./reducers', () => {
+    store.replaceReducer(require('./reducers').default);
+    console.log("Replaced reducers");
+  })
+  module.hot.accept('./App.jsx', () => {
+    render(require('./App.jsx').default);
+    console.log("Replaced App.jsx");
+  });
 }
