@@ -1,5 +1,20 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
+const isDevelopment = process.env["IS_DEV"] === 'true';
+
+const devConfig = {
+    devtool: 'inline-source-map',
+    plugins: []
+};
+
+const productionConfig = {
+    devtool: '',
+    plugins: []
+};
+
+const additionalConfig = isDevelopment ? devConfig : productionConfig;
 
 module.exports = {
     entry: './src/index.jsx',
@@ -14,5 +29,6 @@ module.exports = {
     },
     plugins: [new HtmlWebpackPlugin({
         template: 'src/index.html'
-    })]
+    })].concat(additionalConfig.plugins),
+    devtool: additionalConfig.devtool
 };
