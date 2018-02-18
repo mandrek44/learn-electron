@@ -1,0 +1,14 @@
+{
+  "name": "lrn-electron",
+  "version": "1.0.1",
+  "main": "index.js",
+  "author": "Marcin Drobik <mdrobik@future-processing.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^2.30.1",
+    "webpack": "^3.11.0"
+  }
+}
