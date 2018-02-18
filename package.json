@@ -18,5 +18,8 @@
     "uglifyjs-webpack-plugin": "^1.2.0",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"
+  },
+  "dependencies": {
+    "electron-prebuilt": "^1.4.13"
   }
 }

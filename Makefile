@@ -1,15 +1,19 @@
-PATH  	:= node_modules/.bin:$(PATH)
-YARN	?= yarn
-IS_DEV  ?= false
+PATH  				:= node_modules/.bin:$(PATH)
+YARN				?= yarn
+IS_DEV  			?= false
+USE_WEBPACK_SERVER 	:= false
 
-all: env.lock yarn.lock dist/bundle.js 
+all: env.lock yarn.lock dist/bundle.js dist/main.js
 
 clean:
 	rm -rf ./dist
 	rm yarn.lock
 
-start-dev: yarn.lock
-	webpack-dev-server
+start-dev: yarn.lock	
+	electron src/main.js useWebServer=true & webpack-dev-server
+
+start-dist: all
+	electron dist/main.js
 
 define print_env
 	echo "IS_DEV=$(IS_DEV) YARN=$(YARN)">$(1) 
@@ -26,11 +30,14 @@ env.lock: force-rebuild
 yarn.lock: package.json
 	$(YARN) install
 
-dist/bundle.js: webpack.config.js env.lock yarn.lock src/*.*
+dist/main.js: src/main.js
+	cp src/main.js dist/main.js
+
+dist/bundle.js: webpack.config.js env.lock yarn.lock src/*/*.*
 ifeq ($(IS_DEV), true)
 	webpack
 else
 	webpack -p
 endif
 
-.PHONY: start-dev all clean force-rebuild
+.PHONY: start-dev start-dist all clean force-rebuild electron

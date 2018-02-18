@@ -24,7 +24,7 @@ const productionConfig = {
 const additionalConfig = isDevelopment ? devConfig : productionConfig;
 
 module.exports = {
-    entry: additionalConfig.entries.concat(['./src/index.jsx']),
+    entry: additionalConfig.entries.concat(['./src/renderer/index.jsx']),
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
@@ -35,7 +35,7 @@ module.exports = {
         ]
     },
     plugins: [new HtmlWebpackPlugin({
-        template: 'src/index.html'
+        template: 'src/renderer/index.html'
     })].concat(additionalConfig.plugins),
     devtool: additionalConfig.devtool,
     devServer: additionalConfig.devServer
